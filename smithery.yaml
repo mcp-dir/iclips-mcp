@@ -1,0 +1,39 @@
+# Smithery configuration for iClips
+# Schema: https://smithery.ai/docs/build/project-config
+# Remote HTTP MCP — server hosted at https://api.mcp.ai/p_iclips
+
+name: iclips-mcp
+displayName: "iClips"
+description: >
+  Converse com o **iClips** da sua agência a partir do Claude, do ChatGPT ou de qualquer cliente MCP. Roda sobre a **API pública oficial do iClips**, com a **chave da sua própria agência**. A cunha aqui é o que costuma virar planilha: o **financeiro completo** (contas bancárias, contas a pagar e a receber com vencimento por parcela, notas fiscais emitidas com os impostos retidos) e a **extração de horas apontadas**, descendo até quem executou cada etapa, quanto tempo levou e de qual departamento é. Também cria e atualiza jobs, peças e tarefas, e marca item de checklist de produção. **Não afiliado ao iClips.**
+
+version: 0.1.1
+license: MIT
+homepage: https://github.com/mcp-dir/iclips-mcp
+repository: https://github.com/mcp-dir/iclips-mcp
+
+tags:
+  - iclips
+  - erp
+  - agencia
+  - agency
+  - marketing
+  - brazil
+  - financeiro
+  - timesheet
+  - projetos
+  - read-write
+
+# Remote HTTP MCP — sem startCommand local (servidor já hospedado)
+startCommand:
+  type: http
+  url: https://api.mcp.ai/p_iclips
+
+auth:
+  type: oauth2
+  resourceMetadataUrl: https://api.mcp.ai/p_iclips/.well-known/oauth-protected-resource
+  fallback:
+    type: agent-auth
+    description: >
+      Para clientes sem OAuth 2.1. O agente expõe uma tool authenticate(token).
+      Usuário gera o JWT em https://app.mcp.ai/agent-auth e cola no chat.
